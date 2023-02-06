@@ -1,37 +1,23 @@
-import { useState } from "react";
+import useField from "./useField";
 
 const App = () => {
-  const [name, setName] = useState("");
-  const [born, setBorn] = useState("");
-  const [height, setHeight] = useState("");
+  const name = useField("text");
+  const born = useField("date");
+  const height = useField("number");
   return (
     <div>
       <form>
         name:
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <input type={name.type} value={name.value} onChange={name.onChange} />
         <br />
         birthdate:
-        <input
-          type="date"
-          value={born}
-          onChange={(e) => setBorn(e.target.value)}
-        />
+        <input {...born} />
         <br />
         height:
-        <input
-          type="number"
-          value={height}
-          onChange={(e) => setHeight(e.target.value)}
-        />
+        <input {...height} />
       </form>
       <div>
-        {name}
-        {born}
-        {height}
+        {name.value} {born.value} {height.value}
       </div>
     </div>
   );
